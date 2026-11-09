@@ -19,8 +19,9 @@ user_modes: dict[int, str] = {}
 def get_main_keybord():
     builder = ReplyKeyboardBuilder()
     builder.add(types.KeyboardButton(text="ИИ ЧАТ"))
-    builder.add(types.KeyboardButton(text="🎨ТАҲИЯИ РАСМ"))
-    builder.add(types.KeyboardButton(text="🔍ҶУСТУҶӮ"))
+    builder.add(types.KeyboardButton(text="🎨 ТАҲИЯИ РАСМ"))
+    builder.add(types.KeyboardButton(text="🔍 ҶУСТУҶӮ"))
+    builder.add(types.KeyboardButton(text="👋 Салом"))
     return builder.as_markup(resize_keyboard=True)
 
 @dp.message(Command("start"))
@@ -32,15 +33,19 @@ async def say_hello(message: types.Message):
     user_modes[message.from_user.id] = "chat"
     await message.answer('Режими сӯҳбат бо ИИ оғоз шуд. Лутфан саволи худро нависед.')
 
-@dp.message(lambda message: message.text == "🎨ТАҲИЯИ РАСМ")
+@dp.message(lambda message: message.text == "🎨 ТАҲИЯИ РАСМ")
 async def create_image(message: types.Message):
     user_modes[message.from_user.id] = "image"
     await message.answer('Чи гуна расм таҳия кардан лозим? Промти худро нависед.')
 
-@dp.message(lambda message: message.text == "🔍ҶУСТУҶӮ")
+@dp.message(lambda message: message.text == "🔍 ҶУСТУҶӮ")
 async def search_in_web(message: types.Message):
     user_modes[message.from_user.id] = "search"
     await message.answer('Чиро ҷустуҷӯ кардан мехоҳед? Саволи худро нависед.')
+
+@dp.message(lambda message: message.text == "👋 Салом")
+async def greet_user(message: types.Message):
+    await message.answer('Салом!.')
 
 
 @dp.message()
