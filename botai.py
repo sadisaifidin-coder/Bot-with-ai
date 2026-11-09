@@ -45,7 +45,7 @@ async def search_in_web(message: types.Message):
 
 @dp.message(lambda message: message.text == "👋 Салом")
 async def greet_user(message: types.Message):
-    await message.answer('Салом!.')
+    await message.answer('Ва алейкум салом! Ҳама гулай!?')
 
 
 @dp.message()
